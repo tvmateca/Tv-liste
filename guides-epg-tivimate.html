@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Listes et guides TiviMate</title>
+    <style>
+      :root {
+        --bg: #f4f6f5;
+        --surface: #ffffff;
+        --ink: #16211d;
+        --ink-soft: #4a5a53;
+        --line: #d8e0db;
+        --accent: #0f766e;
+        --accent-ink: #ffffff;
+        --code-bg: #eef3f1;
+        --ok: #0f766e;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #101614;
+          --surface: #1a221f;
+          --ink: #e8efec;
+          --ink-soft: #a3b3ab;
+          --line: #2e3a35;
+          --accent: #2dd4bf;
+          --accent-ink: #0b1512;
+          --code-bg: #232d29;
+          --ok: #2dd4bf;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 28px 18px 48px;
+      }
+      h1 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin: 0 0 6px;
+      }
+      .intro {
+        color: var(--ink-soft);
+        margin: 0 0 26px;
+        font-size: 1rem;
+      }
+      h2 {
+        font-size: 1.05rem;
+        margin: 30px 0 10px;
+      }
+      .link-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 14px;
+      }
+      .link-card .name {
+        font-weight: 700;
+        font-size: 1.05rem;
+        margin: 0 0 8px;
+      }
+      .url {
+        display: block;
+        font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+        font-size: 0.82rem;
+        word-break: break-all;
+        background: var(--code-bg);
+        border-radius: 6px;
+        padding: 10px 12px;
+        margin: 0 0 12px;
+      }
+      .copy-btn {
+        appearance: none;
+        border: 0;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font: inherit;
+        font-weight: 600;
+        min-height: 44px;
+        padding: 10px 20px;
+        cursor: pointer;
+        width: 100%;
+      }
+      .copy-btn:active { opacity: 0.85; }
+      ol {
+        margin: 0;
+        padding-left: 22px;
+      }
+      ol li { margin-bottom: 8px; }
+      .settings {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin: 0;
+        list-style: none;
+      }
+      .settings li {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .settings li:last-child { border-bottom: 0; }
+      .settings .k { color: var(--ink-soft); }
+      .settings .v { font-weight: 600; text-align: right; }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%) translateY(16px);
+        background: var(--ink);
+        color: var(--bg);
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .toast { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Listes et guides pour TiviMate</h1>
+      <p class="intro">Les 10 liens GitHub : les 5 listes de chaînes et les 5 guides. Copie chaque lien et colle-le dans TiviMate.</p>
+
+      <h2>Listes de chaînes</h2>
+
+      <div class="link-card">
+        <p class="name">Liste Tv+ (263 postes)</p>
+        <code class="url" id="url-liste-tvplus">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/Tvplus-direct.m3u</code>
+        <button class="copy-btn" type="button" data-target="url-liste-tvplus">Copier le lien</button>
+      </div>
+
+      <div class="link-card">
+        <p class="name">Liste Anglais (2 244 postes)</p>
+        <code class="url" id="url-liste-anglais">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/Anglais-direct.m3u</code>
+        <button class="copy-btn" type="button" data-target="url-liste-anglais">Copier le lien</button>
+      </div>
+
+      <div class="link-card">
+        <p class="name">Liste Musique vidéo (85 postes)</p>
+        <code class="url" id="url-liste-musique-video">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/Musique-video-direct.m3u</code>
+        <button class="copy-btn" type="button" data-target="url-liste-musique-video">Copier le lien</button>
+      </div>
+
+      <div class="link-card">
+        <p class="name">Liste Musique audio (24 postes)</p>
+        <code class="url" id="url-liste-musique-audio">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/Musique-audio-direct.m3u</code>
+        <button class="copy-btn" type="button" data-target="url-liste-musique-audio">Copier le lien</button>
+      </div>
+
+      <div class="link-card">
+        <p class="name">Liste Autres langues (7 368 postes)</p>
+        <code class="url" id="url-liste-autres-langues">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/Autres-langues-direct.m3u</code>
+        <button class="copy-btn" type="button" data-target="url-liste-autres-langues">Copier le lien</button>
+      </div>
+
+      <h2>Guides EPG</h2>
+
+      <div class="link-card">
+        <p class="name">Guide Tv+</p>
+        <code class="url" id="url-tvplus">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/guide-tvplus-filtre.xml.gz</code>
+        <button class="copy-btn" type="button" data-target="url-tvplus">Copier le lien</button>
+      </div>
+
+      <div class="link-card">
+        <p class="name">Guide Anglais</p>
+        <code class="url" id="url-anglais">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/guide-anglais-filtre.xml.gz</code>
+        <button class="copy-btn" type="button" data-target="url-anglais">Copier le lien</button>
+      </div>
+
+      <div class="link-card">
+        <p class="name">Guide Musique vidéo</p>
+        <code class="url" id="url-musique-video">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/guide-musique-video-filtre.xml.gz</code>
+        <button class="copy-btn" type="button" data-target="url-musique-video">Copier le lien</button>
+      </div>
+
+      <div class="link-card">
+        <p class="name">Guide Musique audio</p>
+        <code class="url" id="url-musique-audio">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/guide-musique-audio-filtre.xml.gz</code>
+        <button class="copy-btn" type="button" data-target="url-musique-audio">Copier le lien</button>
+      </div>
+
+      <div class="link-card">
+        <p class="name">Guide Autres langues</p>
+        <code class="url" id="url-autres-langues">https://raw.githubusercontent.com/tvmateca/Tv-liste/main/guide-autres-langues-filtre.xml.gz</code>
+        <button class="copy-btn" type="button" data-target="url-autres-langues">Copier le lien</button>
+      </div>
+
+      <h2>Instructions</h2>
+      <ol>
+        <li>Ouvre TiviMate, va dans <strong>Listes</strong>, puis <strong>Ajouter une liste → Par lien</strong>.</li>
+        <li>Colle le lien de la liste voulue, puis répète pour chaque autre liste.</li>
+        <li>Le guide est déjà dans chaque liste : vérifie que les programmes s'affichent.</li>
+        <li>Si un guide ne s'affiche pas : <strong>Paramètres → Guides TV (EPG) → Ajouter une source</strong>, colle le lien du guide correspondant et assigne-le à la bonne liste.</li>
+        <li>Tu peux enlever les anciennes listes locales après.</li>
+      </ol>
+
+      <h2>Réglages du guide</h2>
+      <ul class="settings">
+        <li><span class="k">Jours à garder</span><span class="v">1 jour</span></li>
+        <li><span class="k">Mise à jour</span><span class="v">Toutes les 24 h</span></li>
+        <li><span class="k">Mise à jour au démarrage</span><span class="v">Désactivée</span></li>
+      </ul>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Lien copié</div>
+
+    <script>
+      (function () {
+        var toast = document.getElementById('toast');
+        var timer = null;
+        function showToast(msg) {
+          toast.textContent = msg;
+          toast.classList.add('show');
+          clearTimeout(timer);
+          timer = setTimeout(function () { toast.classList.remove('show'); }, 2000);
+        }
+        function fallbackCopy(text, el) {
+          // Tentative 1 : textarea avec focus + sélection complète (le opacity:0 sans focus échoue sur Chrome Android en fichier local)
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.top = '0';
+          ta.style.left = '0';
+          ta.style.width = '2em';
+          ta.style.height = '2em';
+          ta.style.padding = '0';
+          ta.style.border = 'none';
+          ta.style.outline = 'none';
+          ta.style.boxShadow = 'none';
+          ta.style.background = 'transparent';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          try { ta.setSelectionRange(0, text.length); } catch (e) {}
+          var ok = false;
+          try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+          document.body.removeChild(ta);
+          if (ok) { showToast('Lien copié'); return; }
+          // Tentative 2 : sélectionner le texte visible dans la page
+          if (el) {
+            try {
+              var range = document.createRange();
+              range.selectNodeContents(el);
+              var sel = window.getSelection();
+              sel.removeAllRanges();
+              sel.addRange(range);
+              ok = document.execCommand('copy');
+              sel.removeAllRanges();
+            } catch (e2) { ok = false; }
+            if (ok) { showToast('Lien copié'); return; }
+          }
+          // Dernier recours : fenêtre avec le lien à copier à la main (appui long, tout sélectionner, copier)
+          window.prompt('Copie le lien :', text);
+        }
+        var buttons = document.querySelectorAll('.copy-btn');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener('click', function () {
+            var el = document.getElementById(this.getAttribute('data-target'));
+            var text = el.textContent.trim();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).then(
+                function () { showToast('Lien copié'); },
+                function () { fallbackCopy(text, el); }
+              );
+            } else {
+              fallbackCopy(text, el);
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
